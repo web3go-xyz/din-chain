@@ -1,5 +1,5 @@
 use canbus_runtime::{
-	AccountId, AuraConfig, Balance, BalancesConfig, EVMChainIdConfig, GrandpaConfig, HalvingMint,
+	AccountId, AuraConfig, Balance, BalancesConfig, EVMChainIdConfig, GrandpaConfig,
 	RuntimeGenesisConfig, Signature, SudoConfig, SystemConfig, UNIT, WASM_BINARY,
 };
 use sc_chain_spec::Properties;
@@ -66,7 +66,6 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 				vec![
 					get_account_id_from_seed::<sr25519::Public>("Alice"),
 					get_account_id_from_seed::<sr25519::Public>("Bob"),
-					HalvingMint::beneficiary_account(),
 				],
 				true,
 			)
@@ -118,7 +117,6 @@ fn build_genesis(
 		ethereum: Default::default(),
 		evm: Default::default(),
 		base_fee: Default::default(),
-		halving_mint: Default::default(),
 		assets: Default::default(),
 	}
 }

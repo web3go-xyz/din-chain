@@ -393,25 +393,6 @@ impl pallet_base_fee::Config for Runtime {
 	type DefaultElasticity = DefaultElasticity;
 }
 
-impl pallet_template::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type WeightInfo = ();
-}
-
-parameter_types! {
-	pub const HavlingMintId: PalletId = PalletId(*b"can/hlvm");
-}
-
-impl pallet_halving_mint::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type Currency = Balances;
-	type ManagerOrigin = frame_system::EnsureRoot<Self::AccountId>;
-	type TotalIssuance = ConstU128<{ 21_000_000 * UNIT }>;
-	type HalvingInterval = ConstU32<{ 5 * YEARS }>;
-	type BeneficiaryId = HavlingMintId;
-	type OnTokenMinted = ();
-}
-
 /// Charge fee for stored bytes and items.
 pub const fn deposit(items: u32, bytes: u32) -> Balance {
 	items as Balance * UNIT + (bytes as Balance) * UNIT
@@ -530,17 +511,6 @@ parameter_types! {
 	pub const StakingPoolId: PalletId = PalletId(*b"can/stpl");
 }
 
-impl pallet_stable_staking::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type StakingPoolCommitteeOrigin = EnsureRoot<AccountId>;
-	type PoolId = PoolId;
-	type Fungibles = Assets;
-	type Fungible = Balances;
-	type StableTokenBeneficiaryId = StakingPoolId;
-	type NativeTokenBeneficiaryId = HavlingMintId;
-	type PoolStringLimit = ConstU32<100>;
-}
-
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub struct Runtime {
@@ -560,9 +530,6 @@ construct_runtime!(
 		ChainBridge: pallet_bridge = 12,
 		AssetsHandler: pallet_assets_handler = 13,
 		BridgeTransfer: pallet_bridge_transfer = 14,
-		Template: pallet_template = 15,
-		HalvingMint: pallet_halving_mint = 16,
-		StableStaking: pallet_stable_staking = 17,
 	}
 );
 

@@ -15,7 +15,6 @@ use pallet_evm_precompile_ed25519::Ed25519Verify;
 use pallet_evm_precompile_modexp::Modexp;
 use pallet_evm_precompile_sha3fips::Sha3FIPS256;
 use pallet_evm_precompile_simple::{ECRecover, ECRecoverPublicKey, Identity, Ripemd160, Sha256};
-use pallet_stable_staking_precompile::StableStakingPrecompile;
 use precompile_utils::precompile_set::*;
 use sp_std::fmt::Debug;
 /// The asset precompile address prefix. Addresses that match against this prefix will be routed
@@ -68,7 +67,7 @@ impl Contains<RuntimeCall> for WhitelistedCalls {
 	}
 }
 
-/// The PrecompileSet installed in the CAN runtime.
+/// The PrecompileSet installed in the DIN runtime.
 #[precompile_utils::precompile_name_from_address]
 pub type PrecompilesSetAt<R> = (
 	// Ethereum precompiles:
@@ -82,7 +81,7 @@ pub type PrecompilesSetAt<R> = (
 	PrecompileAt<AddressU64<7>, Bn128Mul, EthereumPrecompilesChecks>,
 	PrecompileAt<AddressU64<8>, Bn128Pairing, EthereumPrecompilesChecks>,
 	PrecompileAt<AddressU64<9>, Blake2F, EthereumPrecompilesChecks>,
-	// Non-CAN specific nor Ethereum precompiles :
+	// Non-DIN specific nor Ethereum precompiles :
 	PrecompileAt<AddressU64<1024>, Sha3FIPS256, (CallableByContract, CallableByPrecompile)>,
 	PrecompileAt<
 		AddressU64<1025>,
@@ -93,12 +92,7 @@ pub type PrecompilesSetAt<R> = (
 	>,
 	PrecompileAt<AddressU64<1026>, ECRecoverPublicKey, (CallableByContract, CallableByPrecompile)>,
 	PrecompileAt<AddressU64<1027>, Ed25519Verify, (CallableByContract, CallableByPrecompile)>,
-	// CAN specific precompiles:
-	PrecompileAt<
-		AddressU64<20481>,
-		StableStakingPrecompile<R>,
-		(CallableByContract, CallableByPrecompile),
-	>,
+	// DIN specific precompiles:
 	PrecompileAt<
 		AddressU64<20482>,
 		BridgeTransferPrecompile<R>,
