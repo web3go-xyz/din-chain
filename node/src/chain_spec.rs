@@ -1,10 +1,10 @@
 use canbus_runtime::{
-	AccountId, AuraConfig, Balance, BalancesConfig, EVMChainIdConfig, GrandpaConfig,
+	AccountId, BabeConfig, Balance, BalancesConfig, EVMChainIdConfig, GrandpaConfig,
 	RuntimeGenesisConfig, Signature, SudoConfig, SystemConfig, UNIT, WASM_BINARY,
 };
 use sc_chain_spec::Properties;
 use sc_service::ChainType;
-use sp_consensus_aura::sr25519::AuthorityId as AuraId;
+use sp_consensus_babe::sr25519::AuthorityId as BabeId;
 use sp_consensus_grandpa::AuthorityId as GrandpaId;
 use sp_core::{sr25519, Pair, Public};
 use sp_runtime::traits::{IdentifyAccount, Verify};
@@ -33,9 +33,9 @@ where
 	AccountPublic::from(get_from_seed::<TPublic>(seed)).into_account()
 }
 
-/// Generate an Aura authority key.
-pub fn authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
-	(get_from_seed::<AuraId>(s), get_from_seed::<GrandpaId>(s))
+/// Generate an Babe authority key.
+pub fn authority_keys_from_seed(s: &str) -> (BabeId, GrandpaId) {
+	(get_from_seed::<BabeId>(s), get_from_seed::<GrandpaId>(s))
 }
 
 /// Get default chain properties for Litentry which will be filled into chain spec
@@ -86,7 +86,7 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 
 fn build_genesis(
 	wasm_binary: &[u8],
-	initial_authorities: Vec<(AuraId, GrandpaId)>,
+	initial_authorities: Vec<(BabeId, GrandpaId)>,
 	root_key: AccountId,
 	endowed_accounts: Vec<AccountId>,
 	_enable_println: bool,
@@ -100,7 +100,7 @@ fn build_genesis(
 				.map(|k| (k, DEFAULT_ENDOWED_ACCOUNT_BALANCE))
 				.collect(),
 		},
-		aura: AuraConfig {
+		babe: BabeConfig {
 			authorities: initial_authorities.iter().map(|x| (x.0.clone())).collect(),
 		},
 		grandpa: GrandpaConfig {

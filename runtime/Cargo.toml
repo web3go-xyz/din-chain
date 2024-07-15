@@ -24,7 +24,10 @@ frame-support = { workspace = true, features = ["experimental"] }
 frame-system = { workspace = true }
 frame-try-runtime = { workspace = true, optional = true }
 frame-executive = { workspace = true }
-pallet-aura = { workspace = true }
+pallet-babe = { workspace = true }
+pallet-offences = { workspace = true }
+pallet-session = { workspace = true }
+pallet-authorship = { workspace = true }
 pallet-balances = { workspace = true }
 pallet-grandpa = { workspace = true }
 pallet-sudo = { workspace = true }
@@ -34,7 +37,7 @@ pallet-utility = { workspace = true }
 
 sp-api = { workspace = true }
 sp-block-builder = { workspace = true }
-sp-consensus-aura = { workspace = true, features = ["serde"] }
+sp-consensus-babe = { workspace = true, features = ["serde"] }
 sp-consensus-grandpa = { workspace = true, features = ["serde"] }
 sp-core = { workspace = true, features = ["serde"] }
 sp-inherents = { workspace = true }
@@ -71,6 +74,9 @@ pallet-evm-precompile-simple = { workspace = true }
 pallet-bridge-transfer-precompile = { workspace = true }
 precompile-utils = { workspace = true }
 
+# Common types
+node-primitives = { workspace = true }
+
 pallet-assets-handler = { workspace = true }
 pallet-bridge = { workspace = true }
 pallet-bridge-transfer = { workspace = true }
@@ -94,7 +100,10 @@ std = [
 	"frame-try-runtime?/std",
 
 	"pallet-assets/std",
-	"pallet-aura/std",
+	"pallet-babe/std",
+	"pallet-offences/std",
+	"pallet-session/std",
+	"pallet-authorship/std",
 	"pallet-balances/std",
 	"pallet-grandpa/std",
 	"pallet-sudo/std",
@@ -104,7 +113,7 @@ std = [
 
 	"sp-api/std",
 	"sp-block-builder/std",
-	"sp-consensus-aura/std",
+	"sp-consensus-babe/std",
 	"sp-consensus-grandpa/std",
 	"sp-core/std",
 	"sp-genesis-builder/std",
@@ -157,7 +166,10 @@ try-runtime = [
 	"frame-support/try-runtime",
 	"frame-system/try-runtime",
 	"frame-try-runtime/try-runtime",
-	"pallet-aura/try-runtime",
+	"pallet-babe/try-runtime",
+	"pallet-offences/try-runtime",
+	"pallet-session/try-runtime",
+	"pallet-authorship/try-runtime",
 	"pallet-assets/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
@@ -171,5 +183,3 @@ try-runtime = [
 	"pallet-evm-chain-id/try-runtime",
 	"pallet-base-fee/try-runtime",
 ]
-
-experimental = ["pallet-aura/experimental"]

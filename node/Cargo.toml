@@ -36,8 +36,8 @@ sc-telemetry = { workspace = true }
 sc-transaction-pool = { workspace = true }
 sc-transaction-pool-api = { workspace = true }
 sc-offchain = { workspace = true }
-sc-consensus-aura = { workspace = true }
-sp-consensus-aura = { workspace = true, features = ["std"] }
+sc-consensus-babe = { workspace = true }
+sp-consensus-babe = { workspace = true, features = ["std"] }
 sc-consensus = { workspace = true }
 sc-consensus-grandpa = { workspace = true }
 sp-consensus-grandpa = { workspace = true, features = ["std"] }
