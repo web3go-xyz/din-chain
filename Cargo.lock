@@ -965,10 +965,13 @@ dependencies = [
  "frame-system-rpc-runtime-api",
  "futures",
  "jsonrpsee",
+ "node-primitives",
+ "pallet-im-online",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
  "pallet-transaction-payment-rpc-runtime-api",
  "parity-scale-codec",
+ "rand 0.8.5",
  "sc-basic-authorship",
  "sc-chain-spec",
  "sc-cli",
@@ -1004,6 +1007,7 @@ dependencies = [
  "substrate-build-script-utils",
  "substrate-frame-rpc-system",
  "substrate-prometheus-endpoint",
+ "thiserror",
  "try-runtime-cli",
 ]
 

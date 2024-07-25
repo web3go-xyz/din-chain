@@ -18,6 +18,9 @@ pub use pallet_election_provider_multi_phase::{Call as EPMCall, GeometricDeposit
 use pallet_grandpa::AuthorityId as GrandpaId;
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 
+#[cfg(feature = "std")]
+pub use pallet_staking::StakerStatus;
+use pallet_staking::UseValidatorsMap;
 use sp_api::impl_runtime_apis;
 use sp_consensus_babe::AuthorityId as BabeId;
 use sp_core::{
@@ -512,12 +515,13 @@ parameter_types! {
 	pub const SlashDeferDuration: sp_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
 	pub const RewardCurve: &'static PiecewiseLinear<'static> = &REWARD_CURVE;
 	pub const OffendingValidatorsThreshold: Perbill = Perbill::from_percent(17);
+	pub const MaxNominations: u32 = <NposSolution16 as frame_election_provider_support::NposSolution>::LIMIT as u32;
 	pub OffchainRepeat: BlockNumber = 5;
 	pub HistoryDepth: u32 = 84;
 }
 
 /// Upper limit on the number of NPOS nominations.
-const MAX_QUOTA_NOMINATIONS: u32 = 16;
+//const MAX_QUOTA_NOMINATIONS: u32 = 16;
 
 pub struct StakingBenchmarkingConfig;
 impl pallet_staking::BenchmarkingConfig for StakingBenchmarkingConfig {
@@ -553,7 +557,7 @@ impl pallet_staking::Config for Runtime {
 	type VoterList = VoterList;
 	// This a placeholder, to be introduced in the next PR as an instance of bags-list
 	type TargetList = pallet_staking::UseValidatorsMap<Self>;
-	type NominationsQuota = pallet_staking::FixedNominationsQuota<MAX_QUOTA_NOMINATIONS>;
+	type NominationsQuota = pallet_staking::FixedNominationsQuota<{ MaxNominations::get() }>;
 	type MaxUnlockingChunks = ConstU32<32>;
 	type HistoryDepth = HistoryDepth;
 	type EventListeners = NominationPools;
@@ -864,7 +868,7 @@ impl pallet_bridge_transfer::Config for Runtime {
 }
 
 parameter_types! {
-	pub const StakingPoolId: PalletId = PalletId(*b"can/stpl");
+	pub const StakingPoolId: PalletId = PalletId(*b"din/stpl");
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -1098,7 +1102,6 @@ impl_runtime_apis! {
 		}
 	}
 
-
 	impl sp_consensus_babe::BabeApi<Block> for Runtime {
 		fn configuration() -> sp_consensus_babe::BabeConfiguration {
 			let epoch_config = Babe::epoch_config().unwrap_or(BABE_GENESIS_EPOCH_CONFIG);
@@ -1147,16 +1150,6 @@ impl_runtime_apis! {
 			)
 		}
 	}
-
-//	impl sp_consensus_aura::AuraApi<Block, AuraId> for Runtime {
-//		fn slot_duration() -> sp_consensus_aura::SlotDuration {
-//			sp_consensus_aura::SlotDuration::from_millis(Aura::slot_duration())
-//		}
-//
-//		fn authorities() -> Vec<AuraId> {
-//			Aura::authorities().into_inner()
-//		}
-//	}
 
 	impl sp_session::SessionKeys<Block> for Runtime {
 		fn generate_session_keys(seed: Option<Vec<u8>>) -> Vec<u8> {

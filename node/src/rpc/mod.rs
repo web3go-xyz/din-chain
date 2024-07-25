@@ -7,8 +7,9 @@
 
 use std::sync::Arc;
 
-use canbus_runtime::{opaque::Block, AccountId, Balance, Nonce};
+use canbus_runtime::opaque::Block;
 use jsonrpsee::RpcModule;
+use node_primitives::{AccountId, Balance, Nonce};
 use sc_client_api::{
 	backend::{Backend, StorageProvider},
 	client::BlockchainEvents,
@@ -20,10 +21,10 @@ use sc_service::TransactionPool;
 use sc_transaction_pool::ChainApi;
 use sp_api::{CallApiAt, ProvideRuntimeApi};
 use sp_blockchain::{Error as BlockChainError, HeaderBackend, HeaderMetadata};
-use sp_consensus_babe::AuthorityId as BabeId;
 use sp_inherents::CreateInherentDataProviders;
 use sp_runtime::traits::Block as BlockT;
 
+mod consensus_data_provider;
 mod eth;
 pub use self::eth::{create_eth, overrides_handle, EthDeps};
 
@@ -64,7 +65,7 @@ pub fn create_full<C, P, BE, A, CT, CIDP>(
 where
 	C: CallApiAt<Block> + ProvideRuntimeApi<Block>,
 	C::Api: sp_block_builder::BlockBuilder<Block>,
-	C::Api: sp_consensus_aura::AuraApi<Block, AuraId>,
+	C::Api: sp_consensus_babe::BabeApi<Block>,
 	C::Api: substrate_frame_rpc_system::AccountNonceApi<Block, AccountId, Nonce>,
 	C::Api: pallet_transaction_payment_rpc::TransactionPaymentRuntimeApi<Block, Balance>,
 	C::Api: fp_rpc::ConvertTransactionRuntimeApi<Block>,
