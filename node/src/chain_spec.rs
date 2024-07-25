@@ -1,10 +1,10 @@
 use canbus_runtime::{
 	AccountId, BabeConfig, Balance, BalancesConfig, EVMChainIdConfig, GrandpaConfig,
-	RuntimeGenesisConfig, Signature, SudoConfig, SystemConfig, UNIT, WASM_BINARY,
+	RuntimeGenesisConfig, Signature, SudoConfig, SystemConfig, DOLLARS, WASM_BINARY,
 };
 use sc_chain_spec::Properties;
 use sc_service::ChainType;
-use sp_consensus_babe::sr25519::AuthorityId as BabeId;
+use sp_consensus_babe::AuthorityId as BabeId;
 use sp_consensus_grandpa::AuthorityId as GrandpaId;
 use sp_core::{sr25519, Pair, Public};
 use sp_runtime::traits::{IdentifyAccount, Verify};
@@ -21,7 +21,7 @@ pub fn get_from_seed<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Pu
 		.public()
 }
 
-const DEFAULT_ENDOWED_ACCOUNT_BALANCE: Balance = 100 * UNIT;
+const DEFAULT_ENDOWED_ACCOUNT_BALANCE: Balance = 100 * DOLLARS;
 
 type AccountPublic = <Signature as Verify>::Signer;
 

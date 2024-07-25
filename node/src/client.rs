@@ -1,6 +1,6 @@
 use canbus_runtime::{opaque::Block, AccountId, Balance, Nonce};
 use sc_executor::{NativeElseWasmExecutor, NativeExecutionDispatch, NativeVersion};
-use sp_consensus_aura::sr25519::AuthorityId as AuraId;
+use sp_consensus_babe::AuthorityId as BabeId;
 
 use crate::eth::EthCompatRuntimeApiCollection;
 
@@ -56,7 +56,7 @@ impl<Api> BaseRuntimeApiCollection for Api where
 pub trait RuntimeApiCollection:
 	BaseRuntimeApiCollection
 	+ EthCompatRuntimeApiCollection
-	+ sp_consensus_aura::AuraApi<Block, AuraId>
+	+ sp_consensus_babe::BabeApi<Block, BabeId>
 	+ sp_consensus_grandpa::GrandpaApi<Block>
 	+ frame_system_rpc_runtime_api::AccountNonceApi<Block, AccountId, Nonce>
 	+ pallet_transaction_payment_rpc_runtime_api::TransactionPaymentApi<Block, Balance>
@@ -66,7 +66,7 @@ pub trait RuntimeApiCollection:
 impl<Api> RuntimeApiCollection for Api where
 	Api: BaseRuntimeApiCollection
 		+ EthCompatRuntimeApiCollection
-		+ sp_consensus_aura::AuraApi<Block, AuraId>
+		+ sp_consensus_babe::BabeApi<Block, BabeId>
 		+ sp_consensus_grandpa::GrandpaApi<Block>
 		+ frame_system_rpc_runtime_api::AccountNonceApi<Block, AccountId, Nonce>
 		+ pallet_transaction_payment_rpc_runtime_api::TransactionPaymentApi<Block, Balance>
