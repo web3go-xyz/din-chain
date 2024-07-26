@@ -106,19 +106,19 @@ pub fn new_frontier_partial(
 }
 
 /// A set of APIs that ethereum-compatible runtimes must implement.
-pub trait EthCompatRuntimeApiCollection:
-	sp_api::ApiExt<Block>
-	+ fp_rpc::ConvertTransactionRuntimeApi<Block>
-	+ fp_rpc::EthereumRuntimeRPCApi<Block>
-{
-}
-
-impl<Api> EthCompatRuntimeApiCollection for Api where
-	Api: sp_api::ApiExt<Block>
-		+ fp_rpc::ConvertTransactionRuntimeApi<Block>
-		+ fp_rpc::EthereumRuntimeRPCApi<Block>
-{
-}
+//pub trait EthCompatRuntimeApiCollection:
+//	sp_api::ApiExt<Block>
+// 	+ fp_rpc::ConvertTransactionRuntimeApi<Block>
+// 	+ fp_rpc::EthereumRuntimeRPCApi<Block>
+//{
+//}
+//
+//impl<Api> EthCompatRuntimeApiCollection for Api where
+//	Api: sp_api::ApiExt<Block>
+// 		+ fp_rpc::ConvertTransactionRuntimeApi<Block>
+// 		+ fp_rpc::EthereumRuntimeRPCApi<Block>
+//{
+//}
 
 pub async fn spawn_frontier_tasks(
 	task_manager: &TaskManager,

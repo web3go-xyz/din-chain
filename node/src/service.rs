@@ -23,10 +23,10 @@ type BasicImportQueue = sc_consensus::DefaultImportQueue<Block>;
 type FullPool<Client> = sc_transaction_pool::FullPool<Block, Client>;
 type FullSelectChain = sc_consensus::LongestChain<FullBackend, Block>;
 
-type GrandpaBlockImport<Client> =
-	sc_consensus_grandpa::GrandpaBlockImport<FullBackend, Block, Client, FullSelectChain>;
-type GrandpaLinkHalf<Client> = sc_consensus_grandpa::LinkHalf<Block, Client, FullSelectChain>;
-type BoxBlockImport = sc_consensus::BoxBlockImport<Block>;
+//type GrandpaBlockImport<Client> =
+//sc_consensus_grandpa::GrandpaBlockImport<FullBackend, Block, Client, FullSelectChain>;
+//type GrandpaLinkHalf<Client> = sc_consensus_grandpa::LinkHalf<Block, Client, FullSelectChain>;
+//type BoxBlockImport = sc_consensus::BoxBlockImport<Block>;
 
 // Our native executor instance.
 pub struct ExecutorDispatch;

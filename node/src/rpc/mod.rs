@@ -121,7 +121,7 @@ where
 	let mut io = RpcModule::new(());
 	let FullDeps { client, pool, select_chain, deny_unsafe, eth, babe, grandpa } = deps;
 
-	let BabeDeps { babe_config, babe_worker_handle, keystore } = babe;
+	let BabeDeps { babe_config: _babe_config, babe_worker_handle, keystore } = babe;
 	let GrandpaDeps {
 		shared_voter_state,
 		shared_authority_set,
