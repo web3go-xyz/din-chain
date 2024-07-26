@@ -146,7 +146,7 @@ pub fn run() -> sc_cli::Result<()> {
 			use crate::benchmarking::{
 				inherent_benchmark_data, RemarkBuilder, TransferKeepAliveBuilder,
 			};
-			use canbus_runtime::EXISTENTIAL_DEPOSIT;
+			use canbus_runtime::ExistentialDeposit;
 			use frame_benchmarking_cli::{
 				BenchmarkCmd, ExtrinsicFactory, SUBSTRATE_REFERENCE_HARDWARE,
 			};
@@ -177,7 +177,7 @@ pub fn run() -> sc_cli::Result<()> {
 						Box::new(TransferKeepAliveBuilder::new(
 							client.clone(),
 							sp_keyring::Sr25519Keyring::Alice.to_account_id(),
-							EXISTENTIAL_DEPOSIT,
+							ExistentialDeposit::get(),
 						)),
 					]);
 
