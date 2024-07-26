@@ -1,4 +1,4 @@
-use canbus_runtime::{Block, RuntimeApi};
+use canbus_runtime::Block;
 use fc_db::kv::frontier_database_dir;
 use futures::TryFutureExt;
 use sc_cli::SubstrateCli;
@@ -7,7 +7,6 @@ use sc_service::DatabaseSource;
 use crate::{
 	chain_spec,
 	cli::{Cli, Subcommand},
-	client::CanbusRuntimeExecutor,
 	service::{self, db_config_dir},
 };
 
@@ -201,9 +200,7 @@ pub fn run() -> sc_cli::Result<()> {
 		None => {
 			let runner = cli.create_runner(&cli.run)?;
 			runner.run_node_until_exit(|config| async move {
-				service::new_full::<RuntimeApi, CanbusRuntimeExecutor>(config, cli.eth)
-					.map_err(sc_cli::Error::Service)
-					.await
+				service::new_full(config, cli.eth).map_err(sc_cli::Error::Service).await
 			})
 		},
 	}
