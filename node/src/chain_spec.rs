@@ -1,10 +1,10 @@
 use canbus_runtime::{
 	constants::currency::DOLLARS, opaque::SessionKeys, BabeConfig, BalancesConfig,
-	EVMChainIdConfig, GrandpaConfig, ImOnlineConfig, MaxNominations, NominationPools,
+	EVMChainIdConfig, GrandpaConfig, ImOnlineConfig, MaxNominations,
 	NominationPoolsConfig, RuntimeGenesisConfig, SessionConfig, StakerStatus, StakingConfig,
 	SudoConfig, SystemConfig, WASM_BINARY,
 };
-use node_primitives::{AccountId, Balance, Nonce, Signature};
+use node_primitives::{AccountId, Balance, Signature};
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 use sc_chain_spec::Properties;
 use sc_service::ChainType;

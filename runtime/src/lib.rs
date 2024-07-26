@@ -20,9 +20,7 @@ use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 
 #[cfg(feature = "std")]
 pub use pallet_staking::StakerStatus;
-use pallet_staking::UseValidatorsMap;
 use sp_api::impl_runtime_apis;
-use sp_consensus_babe::AuthorityId as BabeId;
 use sp_core::{
 	crypto::{ByteArray, KeyTypeId},
 	OpaqueMetadata, H160, H256, U256,
@@ -571,7 +569,7 @@ parameter_types! {
 	pub const MaxPointsToBalance: u8 = 10;
 }
 
-use sp_runtime::traits::{Convert, Keccak256};
+use sp_runtime::traits::{Convert};
 pub struct BalanceToU256;
 impl Convert<Balance, sp_core::U256> for BalanceToU256 {
 	fn convert(balance: Balance) -> sp_core::U256 {

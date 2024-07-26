@@ -18,7 +18,6 @@ use sp_blockchain::{Error as BlockChainError, HeaderBackend, HeaderMetadata};
 use sp_consensus_babe::BabeApi;
 use sp_core::H256;
 use sp_inherents::CreateInherentDataProviders;
-use sp_keystore::KeystorePtr;
 use sp_runtime::traits::Block as BlockT;
 
 pub use fc_rpc::{EthBlockDataCacheTask, EthConfig, OverrideHandle};
