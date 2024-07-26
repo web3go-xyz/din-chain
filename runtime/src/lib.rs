@@ -569,7 +569,7 @@ parameter_types! {
 	pub const MaxPointsToBalance: u8 = 10;
 }
 
-use sp_runtime::traits::{Convert};
+use sp_runtime::traits::Convert;
 pub struct BalanceToU256;
 impl Convert<Balance, sp_core::U256> for BalanceToU256 {
 	fn convert(balance: Balance) -> sp_core::U256 {
