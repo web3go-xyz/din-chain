@@ -1,4 +1,4 @@
-use canbus_runtime::{Block, RuntimeApi};
+use canbus_runtime::Block;
 use fc_db::kv::frontier_database_dir;
 use futures::TryFutureExt;
 use sc_cli::SubstrateCli;
@@ -7,7 +7,6 @@ use sc_service::DatabaseSource;
 use crate::{
 	chain_spec,
 	cli::{Cli, Subcommand},
-	client::CanbusRuntimeExecutor,
 	service::{self, db_config_dir},
 };
 
@@ -147,7 +146,7 @@ pub fn run() -> sc_cli::Result<()> {
 			use crate::benchmarking::{
 				inherent_benchmark_data, RemarkBuilder, TransferKeepAliveBuilder,
 			};
-			use canbus_runtime::EXISTENTIAL_DEPOSIT;
+			use canbus_runtime::ExistentialDeposit;
 			use frame_benchmarking_cli::{
 				BenchmarkCmd, ExtrinsicFactory, SUBSTRATE_REFERENCE_HARDWARE,
 			};
@@ -178,7 +177,7 @@ pub fn run() -> sc_cli::Result<()> {
 						Box::new(TransferKeepAliveBuilder::new(
 							client.clone(),
 							sp_keyring::Sr25519Keyring::Alice.to_account_id(),
-							EXISTENTIAL_DEPOSIT,
+							ExistentialDeposit::get(),
 						)),
 					]);
 
@@ -201,9 +200,7 @@ pub fn run() -> sc_cli::Result<()> {
 		None => {
 			let runner = cli.create_runner(&cli.run)?;
 			runner.run_node_until_exit(|config| async move {
-				service::new_full::<RuntimeApi, CanbusRuntimeExecutor>(config, cli.eth)
-					.map_err(sc_cli::Error::Service)
-					.await
+				service::new_full(config, cli.eth).map_err(sc_cli::Error::Service).await
 			})
 		},
 	}
