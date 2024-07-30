@@ -1,4 +1,4 @@
-use canbus_runtime::{
+use din_runtime::{
 	constants::currency::DOLLARS, opaque::SessionKeys, BabeConfig, BalancesConfig,
 	EVMChainIdConfig, ImOnlineConfig, MaxNominations, NominationPoolsConfig, RuntimeGenesisConfig,
 	SessionConfig, StakerStatus, StakingConfig, SudoConfig, SystemConfig, WASM_BINARY,
@@ -57,7 +57,7 @@ fn session_keys(babe: BabeId, grandpa: GrandpaId, im_online: ImOnlineId) -> Sess
 /// Get default chain properties for Litentry which will be filled into chain spec
 fn default_properties() -> Properties {
 	let mut properties = Properties::new();
-	properties.insert("tokenSymbol".into(), "CAN".into());
+	properties.insert("tokenSymbol".into(), "DIN".into());
 	properties.insert("tokenDecimals".into(), 18.into());
 	properties
 }
@@ -67,9 +67,9 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 
 	Ok(ChainSpec::from_genesis(
 		// Name
-		"canbus-dev",
+		"din-dev",
 		// ID
-		"canbus-dev",
+		"din-dev",
 		ChainType::Development,
 		move || {
 			build_genesis(
@@ -103,7 +103,7 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 		// Telemetry
 		None,
 		// Protocol ID
-		Some("canbus"),
+		Some("din"),
 		None,
 		// Properties
 		Some(default_properties()),
@@ -162,7 +162,7 @@ fn build_genesis(
 				.collect(),
 		},
 		babe: BabeConfig {
-			epoch_config: Some(canbus_runtime::BABE_GENESIS_EPOCH_CONFIG),
+			epoch_config: Some(din_runtime::BABE_GENESIS_EPOCH_CONFIG),
 			..Default::default()
 		},
 		grandpa: Default::default(),

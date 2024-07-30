@@ -15,7 +15,7 @@ pub use fc_consensus::FrontierBlockImport;
 use fc_rpc::{EthTask, OverrideHandle};
 pub use fc_rpc_core::types::{FeeHistoryCache, FeeHistoryCacheLimit, FilterPool};
 // Local
-use canbus_runtime::opaque::Block;
+use din_runtime::opaque::Block;
 
 use crate::service::{FullBackend, FullClient};
 

@@ -7,7 +7,7 @@
 
 use std::sync::Arc;
 
-use canbus_runtime::opaque::Block;
+use din_runtime::opaque::Block;
 use jsonrpsee::RpcModule;
 use node_primitives::{AccountId, Balance, BlockNumber, Hash, Nonce};
 use sc_client_api::{

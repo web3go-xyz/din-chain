@@ -1,5 +1,5 @@
 [package]
-name = "canbus"
+name = "din"
 description = "A solochain node template built with Substrate, part of Polkadot Sdk."
 version = "0.0.0"
 license = "MIT-0"
@@ -91,7 +91,7 @@ fp-dynamic-fee = { workspace = true, features = ["std"] }
 fp-evm = { workspace = true, features = ["std"] }
 fp-rpc = { workspace = true, features = ["std"] }
 
-canbus-runtime = { workspace = true, features = ["std"] }
+din-runtime = { workspace = true, features = ["std"] }
 node-primitives = { workspace = true, features = ["std"] }
 
 [build-dependencies]
@@ -112,13 +112,13 @@ runtime-benchmarks = [
 	"frame-benchmarking-cli/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
 	"sc-service/runtime-benchmarks",
-	"canbus-runtime/runtime-benchmarks",
+	"din-runtime/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
 try-runtime = [
 	"frame-system/try-runtime",
 	"pallet-transaction-payment/try-runtime",
-	"canbus-runtime/try-runtime",
+	"din-runtime/try-runtime",
 	"sp-runtime/try-runtime",
 	"try-runtime-cli/try-runtime",
 ]

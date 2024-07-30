@@ -21,7 +21,7 @@
 
 use std::{sync::Arc, time::Duration};
 
-use canbus_runtime::{self as runtime, BalancesCall, SystemCall};
+use din_runtime::{self as runtime, BalancesCall, SystemCall};
 use codec::Encode;
 use node_primitives::{AccountId, Balance};
 use sc_cli::Result;

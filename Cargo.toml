@@ -207,7 +207,7 @@ xcm = { package = "staging-xcm", git = "https://github.com/paritytech/polkadot-s
 pallet-assets-handler = { path = "pallets/assets-handler", default-features = false }
 pallet-bridge = { path = "pallets/bridge", default-features = false }
 pallet-bridge-transfer = { path = "pallets/bridge-transfer", default-features = false }
-canbus-runtime = { path = "runtime", default-features = false }
+din-runtime = { path = "runtime", default-features = false }
 pallet-bridge-transfer-precompile = { path = "precompiles/bridge-transfer", default-features = false }
 pallet-evm-precompile-assets-erc20 =  { path = "precompiles/assets-erc20", default-features = false }
 # Common types

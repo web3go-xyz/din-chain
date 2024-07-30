@@ -1,4 +1,4 @@
-use canbus_runtime::{opaque::Block, RuntimeApi};
+use din_runtime::{opaque::Block, RuntimeApi};
 use sc_consensus_babe::{BabeWorkerHandle, SlotProportion};
 use sc_executor::{NativeElseWasmExecutor, NativeExecutionDispatch, NativeVersion};
 use std::{path::Path, sync::Arc, time::Duration};
@@ -17,7 +17,7 @@ use crate::eth::{
 	new_frontier_partial, spawn_frontier_tasks, BackendType, FrontierBackend, FrontierBlockImport,
 	FrontierPartialComponents,
 };
-use canbus_runtime::{self, TransactionConverter};
+use din_runtime::{self, TransactionConverter};
 
 type BasicImportQueue = sc_consensus::DefaultImportQueue<Block>;
 type FullPool<Client> = sc_transaction_pool::FullPool<Block, Client>;
@@ -40,11 +40,11 @@ impl NativeExecutionDispatch for ExecutorDispatch {
 	type ExtendHostFunctions = ();
 
 	fn dispatch(method: &str, data: &[u8]) -> Option<Vec<u8>> {
-		canbus_runtime::api::dispatch(method, data)
+		din_runtime::api::dispatch(method, data)
 	}
 
 	fn native_version() -> NativeVersion {
-		canbus_runtime::native_version()
+		din_runtime::native_version()
 	}
 }
 /// Full backend.

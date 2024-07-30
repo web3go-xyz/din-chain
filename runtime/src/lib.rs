@@ -87,7 +87,7 @@ use constants::{currency::*, time::*};
 
 use node_primitives::*;
 
-pub type CanPrecompiles<Runtime> = Precompiles<Runtime>;
+pub type DinPrecompiles<Runtime> = Precompiles<Runtime>;
 
 /// Opaque types. These are used by the CLI to instantiate machinery that don't need to know
 /// the specifics of the runtime. They can then be made to be agnostic over specific formats
@@ -118,8 +118,8 @@ pub mod opaque {
 // https://docs.substrate.io/main-docs/build/upgrade#runtime-versioning
 #[sp_version::runtime_version]
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("canbus"),
-	impl_name: create_runtime_str!("canbus"),
+	spec_name: create_runtime_str!("din"),
+	impl_name: create_runtime_str!("din"),
 	authoring_version: 1,
 	// The version of the runtime specification. A full node will not attempt to use its native
 	//   runtime in substitute for the on-chain Wasm runtime unless all of `spec_name`,
@@ -680,7 +680,7 @@ const MAX_POV_SIZE: u64 = 5 * 1024 * 1024;
 parameter_types! {
 	pub BlockGasLimit: U256 = U256::from(BLOCK_GAS_LIMIT);
 	pub const GasLimitPovSizeRatio: u64 = BLOCK_GAS_LIMIT.saturating_div(MAX_POV_SIZE);
-	pub PrecompilesValue: CanPrecompiles<Runtime> = CanPrecompiles::<_>::new();
+	pub PrecompilesValue: DinPrecompiles<Runtime> = DinPrecompiles::<_>::new();
 	pub WeightPerGas: Weight = Weight::from_parts(weight_per_gas(BLOCK_GAS_LIMIT, NORMAL_DISPATCH_RATIO, WEIGHT_MILLISECS_PER_BLOCK), 0);
 	pub SuicideQuickClearLimit: u32 = 0;
 }
@@ -695,7 +695,7 @@ impl pallet_evm::Config for Runtime {
 	type AddressMapping = pallet_evm::HashedAddressMapping<BlakeTwo256>;
 	type Currency = Balances;
 	type RuntimeEvent = RuntimeEvent;
-	type PrecompilesType = CanPrecompiles<Self>;
+	type PrecompilesType = DinPrecompiles<Self>;
 	type PrecompilesValue = PrecompilesValue;
 	type ChainId = EVMChainId;
 	type BlockGasLimit = BlockGasLimit;
@@ -822,7 +822,7 @@ impl pallet_assets::Config for Runtime {
 parameter_types! {
 	pub const BridgeChainId: u8 = 2; // TODO: Determine our chain id
 	pub const ProposalLifetime: BlockNumber = 50400; // ~7 days
-	pub const TreasuryPalletId: PalletId = PalletId(*b"can/bdge");
+	pub const TreasuryPalletId: PalletId = PalletId(*b"din/bdge");
 	pub TreasuryAccount: AccountId = TreasuryPalletId::get().into_account_truncating();
 }
 

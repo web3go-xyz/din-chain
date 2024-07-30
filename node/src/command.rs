@@ -1,4 +1,4 @@
-use canbus_runtime::Block;
+use din_runtime::Block;
 use fc_db::kv::frontier_database_dir;
 use futures::TryFutureExt;
 use sc_cli::SubstrateCli;
@@ -146,7 +146,7 @@ pub fn run() -> sc_cli::Result<()> {
 			use crate::benchmarking::{
 				inherent_benchmark_data, RemarkBuilder, TransferKeepAliveBuilder,
 			};
-			use canbus_runtime::ExistentialDeposit;
+			use din_runtime::ExistentialDeposit;
 			use frame_benchmarking_cli::{
 				BenchmarkCmd, ExtrinsicFactory, SUBSTRATE_REFERENCE_HARDWARE,
 			};
