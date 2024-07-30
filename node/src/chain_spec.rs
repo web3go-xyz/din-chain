@@ -1,8 +1,7 @@
 use canbus_runtime::{
 	constants::currency::DOLLARS, opaque::SessionKeys, BabeConfig, BalancesConfig,
-	EVMChainIdConfig, GrandpaConfig, ImOnlineConfig, MaxNominations, NominationPoolsConfig,
-	RuntimeGenesisConfig, SessionConfig, StakerStatus, StakingConfig, SudoConfig, SystemConfig,
-	WASM_BINARY,
+	EVMChainIdConfig, ImOnlineConfig, MaxNominations, NominationPoolsConfig, RuntimeGenesisConfig,
+	SessionConfig, StakerStatus, StakingConfig, SudoConfig, SystemConfig, WASM_BINARY,
 };
 use node_primitives::{AccountId, Balance, Signature};
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
@@ -28,7 +27,7 @@ pub fn get_from_seed<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Pu
 		.public()
 }
 
-const DEFAULT_ENDOWED_ACCOUNT_BALANCE: Balance = 100 * DOLLARS;
+const DEFAULT_ENDOWED_ACCOUNT_BALANCE: Balance = 10_000_000 * DOLLARS;
 
 type AccountPublic = <Signature as Verify>::Signer;
 
@@ -75,7 +74,7 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 		move || {
 			build_genesis(
 				wasm_binary,
-				// Initial PoA authorities
+				// Initial authorities
 				vec![authority_keys_from_seed("Alice"), authority_keys_from_seed("Bob")],
 				// Initial nominators
 				vec![],
@@ -85,6 +84,16 @@ pub fn chain_spec_dev() -> Result<ChainSpec, String> {
 				vec![
 					get_account_id_from_seed::<sr25519::Public>("Alice"),
 					get_account_id_from_seed::<sr25519::Public>("Bob"),
+					get_account_id_from_seed::<sr25519::Public>("Charlie"),
+					get_account_id_from_seed::<sr25519::Public>("Dave"),
+					get_account_id_from_seed::<sr25519::Public>("Eve"),
+					get_account_id_from_seed::<sr25519::Public>("Ferdie"),
+					get_account_id_from_seed::<sr25519::Public>("Alice//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Bob//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Charlie//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Dave//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Eve//stash"),
+					get_account_id_from_seed::<sr25519::Public>("Ferdie//stash"),
 				],
 				true,
 			)
@@ -123,7 +132,7 @@ fn build_genesis(
 		});
 
 	// stakers: all validators and nominators.
-	const ENDOWMENT: Balance = 10_000_000 * DOLLARS;
+	const ENDOWMENT: Balance = DEFAULT_ENDOWED_ACCOUNT_BALANCE;
 	const STASH: Balance = ENDOWMENT / 1000;
 	let mut rng = rand::thread_rng();
 	let stakers = initial_authorities
@@ -152,16 +161,11 @@ fn build_genesis(
 				.map(|k| (k, DEFAULT_ENDOWED_ACCOUNT_BALANCE))
 				.collect(),
 		},
-		// TODO: Check initial authorities of babe and grandpa
 		babe: BabeConfig {
-			authorities: initial_authorities.iter().map(|x| (x.2.clone(), 1)).collect(),
 			epoch_config: Some(canbus_runtime::BABE_GENESIS_EPOCH_CONFIG),
 			..Default::default()
 		},
-		grandpa: GrandpaConfig {
-			authorities: initial_authorities.iter().map(|x| (x.3.clone(), 1)).collect(),
-			..Default::default()
-		},
+		grandpa: Default::default(),
 		session: SessionConfig {
 			keys: initial_authorities
 				.iter()
