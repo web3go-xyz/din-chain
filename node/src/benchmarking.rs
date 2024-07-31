@@ -21,8 +21,8 @@
 
 use std::{sync::Arc, time::Duration};
 
-use din_runtime::{self as runtime, BalancesCall, SystemCall};
 use codec::Encode;
+use din_runtime::{self as runtime, BalancesCall, SystemCall};
 use node_primitives::{AccountId, Balance};
 use sc_cli::Result;
 use sc_client_api::BlockBackend;
