@@ -25,6 +25,7 @@ thiserror = { workspace = true }
 futures = { workspace = true }
 serde_json = { workspace = true, features = ["std"] }
 jsonrpsee = { workspace = true }
+hex-literal = { workspace = true }
 
 prometheus-endpoint = { workspace = true }
 sc-cli = { workspace = true }

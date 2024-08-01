@@ -482,6 +482,7 @@ impl pallet_election_provider_multi_phase::Config for Runtime {
 }
 
 parameter_types! {
+	// TODO Update bag thresholds
 	pub const BagThresholds: &'static [u64] = &[];// &voter_bags::THRESHOLDS;
 }
 
