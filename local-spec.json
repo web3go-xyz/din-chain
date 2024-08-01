@@ -1,13 +1,11 @@
 {
   "name": "din-local",
   "id": "din-local",
-  "chainType": "Development",
-  "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWRm651Kd5GmsLTHJbgX5chQS5npx9ttLgo46UsegCMoNM"
-  ],
+  "chainType": "Live",
+  "bootNodes": [],
   "telemetryEndpoints": [
     [
-      "/dns/telemetry.polkadot.io/tcp/443/x-parity-wss/%2Fsubmit%2F",
+      "/dns/telemetry.polkadot.io/tcp/443/x-parity-wss/%2Fsubmit%2F%25200",
       0
     ]
   ],

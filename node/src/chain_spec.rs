@@ -2,8 +2,8 @@ use hex_literal::hex;
 
 use din_runtime::{
 	constants::currency::DOLLARS, opaque::SessionKeys, BabeConfig, BalancesConfig,
-	EVMChainIdConfig, ImOnlineConfig, MaxNominations, NominationPoolsConfig, RuntimeGenesisConfig,
-	SessionConfig, StakerStatus, StakingConfig, SudoConfig, SystemConfig, WASM_BINARY,
+	EVMChainIdConfig, ImOnlineConfig, MaxNominations, RuntimeGenesisConfig, SessionConfig,
+	StakerStatus, StakingConfig, SudoConfig, SystemConfig, WASM_BINARY,
 };
 use node_primitives::{AccountId, Balance, Signature};
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
@@ -283,11 +283,6 @@ fn build_genesis(
 			invulnerables: initial_authorities.iter().map(|x| x.0.clone()).collect(),
 			slash_reward_fraction: Perbill::from_percent(10),
 			stakers,
-			..Default::default()
-		},
-		nomination_pools: NominationPoolsConfig {
-			min_create_bond: 10 * DOLLARS,
-			min_join_bond: 1 * DOLLARS,
 			..Default::default()
 		},
 		sudo: SudoConfig {
