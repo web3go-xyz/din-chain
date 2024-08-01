@@ -6,6 +6,7 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
+mod bag_thresholds;
 use codec::{Compact, Decode, Encode};
 use fp_evm::weight_per_gas;
 use fp_rpc::TransactionStatus;
@@ -36,7 +37,7 @@ use sp_runtime::{
 	transaction_validity::{
 		TransactionPriority, TransactionSource, TransactionValidity, TransactionValidityError,
 	},
-	ApplyExtrinsicResult, FixedU128, Percent,
+	ApplyExtrinsicResult, Percent,
 };
 use sp_staking::currency_to_vote::U128CurrencyToVote;
 use sp_std::{marker::PhantomData, prelude::*};
@@ -483,7 +484,7 @@ impl pallet_election_provider_multi_phase::Config for Runtime {
 
 parameter_types! {
 	// TODO Update bag thresholds
-	pub const BagThresholds: &'static [u64] = &[];// &voter_bags::THRESHOLDS;
+	pub const BagThresholds: &'static [u64] = &bag_thresholds::THRESHOLDS;
 }
 
 type VoterBagsListInstance = pallet_bags_list::Instance1;
