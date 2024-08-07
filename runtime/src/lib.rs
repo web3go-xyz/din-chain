@@ -483,7 +483,6 @@ impl pallet_election_provider_multi_phase::Config for Runtime {
 }
 
 parameter_types! {
-	// TODO Update bag thresholds
 	pub const BagThresholds: &'static [u64] = &bag_thresholds::THRESHOLDS;
 }
 
@@ -855,6 +854,7 @@ construct_runtime!(
 		Staking: pallet_staking = 23,
 		ElectionProviderMultiPhase: pallet_election_provider_multi_phase = 24,
 		VoterList: pallet_bags_list::<Instance1> = 25,
+		Authorship: pallet_authorship = 26,
 		// EVM related pallets
 		Ethereum: pallet_ethereum = 30,
 		EVM: pallet_evm = 31,
